@@ -16,10 +16,8 @@ class NumMatrix {
         }
 
         for(int col=0; col<cols; col++){
-            for(int row=0; row<rows; row++){
-                if(row==0){
-                    continue;
-                }
+            for(int row=1; row<rows; row++){
+            
                 pSum[row][col] = pSum[row-1][col]+pSum[row][col];
             }
         }
