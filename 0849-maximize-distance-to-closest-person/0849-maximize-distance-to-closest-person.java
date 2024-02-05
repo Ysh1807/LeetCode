@@ -1,41 +1,21 @@
 class Solution {
     public int maxDistToClosest(int[] seats) {
-        int[] pre = new int[seats.length];
-        int[] suff = new int[seats.length];
+        int dist = Integer.MIN_VALUE;
+        int i = -1;
         
-        int lastPreIdx = Integer.MAX_VALUE;
-        for(int i=0; i< seats.length; i++){
-            if (seats[i]==1){
-                lastPreIdx = i;
-                pre[i] = 0;
-            }else {
-                if (lastPreIdx!=Integer.MAX_VALUE){
-                    pre[i] = i - lastPreIdx;
+        for (int j=0; j< seats.length; j++){
+            if (seats[j]==1){
+                if (i==-1){
+                    dist = Math.max(dist, j);
                 }else {
-                    pre[i] = lastPreIdx;
+                    dist = Math.max(dist, (j-i)/2);
                 }
+                i=j;
             }
         }
-        int lastSuffIdx = Integer.MAX_VALUE;
-        for(int i= seats.length-1; i>=0; i--){
-            if (seats[i]==1){
-                lastSuffIdx = i;
-                suff[i] = 0;
-            }else {
-                if (lastSuffIdx!=Integer.MAX_VALUE){
-                    suff[i] = lastSuffIdx - i;
-                }else {
-                    suff[i] = lastSuffIdx;
-                }
-            }
-        }
-        int ans = Integer.MIN_VALUE;
-        int min;
-        for (int i=0; i< seats.length; i++){
-            min = Math.min(pre[i], suff[i]);
-            ans = Math.max(min, ans);
-        }
         
-        return ans;
+        dist = Math.max(dist, seats.length-1-i);
+        
+        return dist;
     }
 }
