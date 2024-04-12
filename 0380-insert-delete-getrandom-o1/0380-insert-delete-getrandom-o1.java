@@ -1,7 +1,6 @@
 class RandomizedSet {
         HashMap<Integer, Integer> hm;
         ArrayList<Integer> list;
-        int idx = 0;
 
         public RandomizedSet() {
              hm = new HashMap<>();
@@ -10,9 +9,8 @@ class RandomizedSet {
 
         public boolean insert(int val) {
             if (!hm.containsKey(val)){
-                hm.put(val, idx);
-                list.add(idx, val);
-                idx++;
+                hm.put(val, list.size());
+                list.add(val);
                 return true;
             }
             return false;
@@ -31,7 +29,6 @@ class RandomizedSet {
                 if (!list.isEmpty() && swapped){
                     hm.put(list.get(i), i);
                 }
-                idx = list.size();
                 return true;
             }
             return false;
